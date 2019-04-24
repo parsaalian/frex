@@ -13,4 +13,9 @@ export default class StateTable {
   read(stateName) {
     return this.table.get(stateName);
   }
+
+  update(stateName, stateValue, accessMode=null) {
+    const state = this.table.get(stateName);
+    state.change(stateValue, accessMode);
+  }
 }
