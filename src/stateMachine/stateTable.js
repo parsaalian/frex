@@ -6,7 +6,7 @@ export default class StateTable {
   }
 
   create(stateName, stateValue, accessMode) {
-    const newState = State(stateValue, accessMode);
+    const newState = new State(stateValue, accessMode);
     this.table.set(stateName, newState);
   }
 }
