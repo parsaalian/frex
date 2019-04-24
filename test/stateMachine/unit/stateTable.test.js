@@ -34,3 +34,11 @@ test('Update with access', () => {
   expect(state.value).toBe('test2');
   expect(state.access).toBe('rwr');
 });
+
+test('Delete', () => {
+  const stateTable = new StateTable();
+  stateTable.create('test', 'test', 'rrr');
+  expect(stateTable.table.size).toBe(1);
+  stateTable.delete('test');
+  expect(stateTable.table.size).toBe(0);
+});
