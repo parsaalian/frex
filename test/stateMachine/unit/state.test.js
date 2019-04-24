@@ -1,4 +1,4 @@
-import State from '../../src/state';
+import State from '../../../src/stateMachine/state';
 
 test('state instantiation', () => {
   var state = new State('test', 'rrr');
