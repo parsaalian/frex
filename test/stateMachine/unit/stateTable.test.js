@@ -1,3 +1,4 @@
+import {VALUE, ACCESS} from '../../../src/stateMachine/consts';
 import StateTable from '../../../src/stateMachine/stateTable';
 
 test('Instantiation', () => {
@@ -18,20 +19,19 @@ test('Read', () => {
   expect(state.value).toBe('test');
 });
 
-test('Update without access', () => {
+test('Update value', () => {
   const stateTable = new StateTable();
   stateTable.create('test', 'test1', 'rrr');
-  stateTable.update('test', 'test2');
+  stateTable.update('test', 'test2', VALUE);
   const state = stateTable.read('test');
   expect(state.value).toBe('test2');
 });
 
-test('Update with access', () => {
+test('Update access', () => {
   const stateTable = new StateTable();
-  stateTable.create('test', 'test1', 'rrr');
-  stateTable.update('test', 'test2', 'rwr');
+  stateTable.create('test', 'test', 'rrr');
+  stateTable.update('test', 'rwr', ACCESS);
   const state = stateTable.read('test');
-  expect(state.value).toBe('test2');
   expect(state.access).toBe('rwr');
 });
 

@@ -1,3 +1,4 @@
+import {VALUE, ACCESS} from '../../../src/stateMachine/consts';
 import State from '../../../src/stateMachine/state';
 
 test('Instantiation', () => {
@@ -6,15 +7,14 @@ test('Instantiation', () => {
   expect(state.access).toBe('rrr');
 });
 
-test('Change without access', () => {
+test('Change value', () => {
   var state = new State('test1', 'rrr');
-  state.change('test2');
+  state.change('test2', VALUE);
   expect(state.value).toBe('test2');
 });
 
-test('Change with access', () => {
+test('Change access', () => {
   var state = new State('test1', 'rrr');
-  state.change('test2', 'rwr');
-  expect(state.value).toBe('test2');
+  state.change('rwr', ACCESS);
   expect(state.access).toBe('rwr');
 });
