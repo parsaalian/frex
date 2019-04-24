@@ -18,4 +18,8 @@ export default class StateTable {
     const state = this.table.get(stateName);
     state.change(stateValue, accessMode);
   }
+
+  delete(stateName) {
+    this.table.delete(stateName);
+  }
 }
