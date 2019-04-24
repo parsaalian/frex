@@ -1,0 +1,25 @@
+{
+  "name": "frex",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.7.1",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^24.0.0"
+  },
+  "author": "Parsa Alian",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-cli": "^6.24.0",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.0",
+    "jest": "^24.7.1"
+  }
+}
