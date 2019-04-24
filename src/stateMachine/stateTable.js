@@ -1,12 +1,20 @@
-import State from './state';
+class State {
+  constructor(value) {
+    this.value = value;
+  }
 
-export default class StateTable {
+  change(value) {
+    this.value = value;
+  }
+}
+
+class StateTable {
   constructor() {
     this.table = new Map();
   }
 
-  create(stateName, stateValue, accessMode) {
-    const newState = new State(stateValue, accessMode);
+  create(stateName, stateValue) {
+    const newState = new State(stateValue);
     this.table.set(stateName, newState);
   }
 
@@ -14,12 +22,15 @@ export default class StateTable {
     return this.table.get(stateName);
   }
 
-  update(stateName, value, property) {
+  update(stateName, value) {
     const state = this.table.get(stateName);
-    state.change(value, property);
+    state.change(value);
   }
 
   delete(stateName) {
     this.table.delete(stateName);
   }
 }
+
+export { State };
+export default StateTable;
