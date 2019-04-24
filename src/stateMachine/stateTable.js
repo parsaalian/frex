@@ -9,4 +9,8 @@ export default class StateTable {
     const newState = new State(stateValue, accessMode);
     this.table.set(stateName, newState);
   }
+
+  read(stateName) {
+    return this.table.get(stateName);
+  }
 }

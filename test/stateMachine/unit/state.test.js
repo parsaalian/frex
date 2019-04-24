@@ -1,6 +1,6 @@
 import State from '../../../src/stateMachine/state';
 
-test('State Instantiation', () => {
+test('State instantiation', () => {
   var state = new State('test', 'rrr');
   expect(state.value).toBe('test');
   expect(state.access).toBe('rrr');
