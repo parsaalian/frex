@@ -1,4 +1,9 @@
 const VALUE = 'value';
-const ACCESS = 'access';
 
-export {VALUE, ACCESS};
+const stateActions = {
+  CREATE: 'create',
+  UPDATE: 'update',
+  DELETE: 'delete'
+};
+
+export {stateActions};

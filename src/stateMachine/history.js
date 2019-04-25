@@ -26,13 +26,13 @@ export default class HistoryTable {
     this.tableHead = new HistoryUnit(null, null, null, null);
   }
 
-  addHistoryUnit(type, state, previous, current) {
+  push(type, state, previous, current) {
     const unit = new HistoryUnit(type, state, previous, current);
     unit.setBackPointer(this.tableHead);
     this.tableHead = unit;
   }
 
-  removeLastUnit() {
+  pop() {
     this.tableHead = this.tableHead.getUnitBehind();
   }
 
