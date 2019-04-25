@@ -21,9 +21,11 @@ class StateTable {
     this.history = new HistoryTable();
   }
 
-  create(stateName, stateValue) {
+  create(stateName, stateValue, rollback=false) {
     const newState = new State(stateValue);
-    this.history.push(stateActions.CREATE, stateName, null, stateValue);
+    if (!rollback) {
+      this.history.push(stateActions.CREATE, stateName, null, stateValue);
+    }
     this.table.set(stateName, newState);
   }
 
@@ -31,16 +33,35 @@ class StateTable {
     return this.table.get(stateName);
   }
 
-  update(stateName, value) {
+  update(stateName, value, rollback=false) {
     const state = this.table.get(stateName);
-    this.history.push(stateActions.UPDATE, stateName, state.getValue(), value);
+    if (!rollback) {
+      this.history.push(stateActions.UPDATE, stateName, state.getValue(), value);
+    }
     state.change(value);
   }
 
-  delete(stateName) {
+  delete(stateName, rollback=false) {
     const state = this.table.get(stateName);
-    this.history.push(stateActions.DELETE, stateName, state.getValue(), null);
+    if (!rollback) {
+      this.history.push(stateActions.DELETE, stateName, state.getValue(), null);
+    }
     this.table.delete(stateName);
+  }
+
+  rollback() {
+    const lastAction = this.table.pop();
+    switch (lastAction.type) {
+      case stateActions.CREATE:
+        this.delete(lastAction.state, true);
+        break;
+      case stateActions.DELETE:
+        this.create(lastAction.state, lastAction.previous, true);
+        break;
+      case stateActions.UPDATE:
+        this.update(lastAction.state, lastAction.previous, true);
+        break;
+    }
   }
 }
 

@@ -33,7 +33,9 @@ export default class HistoryTable {
   }
 
   pop() {
+    const last = this.tableHead;
     this.tableHead = this.tableHead.getUnitBehind();
+    return this.tableHead;
   }
 
   getHead() {
