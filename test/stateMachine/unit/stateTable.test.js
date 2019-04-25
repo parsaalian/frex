@@ -3,13 +3,13 @@ import { State } from '../../../src/stateMachine/stateTable';
 
 test('Instantiate state', () => {
   var state = new State('test');
-  expect(state.value).toBe('test');
+  expect(state.getValue()).toBe('test');
 });
 
 test('Change value of state', () => {
   var state = new State('test1');
   state.change('test2');
-  expect(state.value).toBe('test2');
+  expect(state.getValue()).toBe('test2');
 });
 
 test('Instantiate state table', () => {
@@ -27,7 +27,7 @@ test('Read from state table', () => {
   const stateTable = new StateTable();
   stateTable.create('test', 'test');
   const state = stateTable.read('test')
-  expect(state.value).toBe('test');
+  expect(state.getValue()).toBe('test');
 });
 
 test('Update state table value', () => {
@@ -35,7 +35,7 @@ test('Update state table value', () => {
   stateTable.create('test', 'test1');
   stateTable.update('test', 'test2');
   const state = stateTable.read('test');
-  expect(state.value).toBe('test2');
+  expect(state.getValue()).toBe('test2');
 });
 
 test('Delete from state table', () => {
@@ -45,3 +45,20 @@ test('Delete from state table', () => {
   stateTable.delete('test');
   expect(stateTable.table.size).toBe(0);
 });
+
+/*test('Rollback for create', () => {
+  const stateTable = new StateTable();
+  stateTable.create('test1', 'test1');
+  stateTable.create('test2', 'test2');
+  stateTable.rollback();
+  expect(stateTable.table.size).toBe(1);
+});
+
+test('Rollback for update', () => {
+  const stateTable = new StateTable();
+  stateTable.create('test', 'test1');
+  stateTable.update('test', 'test2');
+  stateTable.rollback();
+  const state = stateTable.read('test');
+  expect(state.getValue()).toBe('test2');
+});*/
