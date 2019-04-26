@@ -1,7 +1,7 @@
 import { stateActions } from './consts';
 import HistoryTable from './history';
 
-class State {
+export class State {
   constructor(value) {
     this.value = value;
   }
@@ -15,7 +15,7 @@ class State {
   }
 }
 
-class StateTable {
+export default class StateTable {
   constructor() {
     this.tables = [];
     this.table = new Map();
@@ -81,6 +81,3 @@ class StateTable {
     return this.tables[n - 1];
   }
 }
-
-export { State };
-export default StateTable;
