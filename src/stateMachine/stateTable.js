@@ -17,6 +17,7 @@ class State {
 
 class StateTable {
   constructor() {
+    this.tables = [];
     this.table = new Map();
     this.history = new HistoryTable();
   }
@@ -37,8 +38,6 @@ class StateTable {
     const state = this.table.get(stateName);
     if (!rollback) {
       this.history.push(stateActions.UPDATE, stateName, state.getValue(), value);
-    } else {
-      console.log(1);
     }
     state.change(value);
   }
@@ -53,7 +52,6 @@ class StateTable {
 
   rollback() {
     const lastAction = this.history.pop();
-    console.log(this.history.getHead());
     switch (lastAction.type) {
       case stateActions.CREATE:
         this.delete(lastAction.state, true);
@@ -71,6 +69,16 @@ class StateTable {
     for (var i = 0; i < n; i++) {
       rollback();
     }
+  }
+
+  commit() {
+    this.tables.push([this.table, this.history]);
+    this.table = new Map();
+    this.history = new HistoryTable();
+  }
+
+  getCommit(n) {
+    return this.tables[n - 1];
   }
 }
 

@@ -46,7 +46,7 @@ test('Delete from state table', () => {
   expect(stateTable.table.size).toBe(0);
 });
 
-/*test('Rollback for create', () => {
+test('Rollback for create', () => {
   const stateTable = new StateTable();
   stateTable.create('test1', 'test1');
   stateTable.create('test2', 'test2');
@@ -60,5 +60,13 @@ test('Rollback for update', () => {
   stateTable.update('test', 'test2');
   stateTable.rollback();
   const state = stateTable.read('test');
-  expect(state.getValue()).toBe('test2');
-});*/
+  expect(state.getValue()).toBe('test1');
+});
+
+test('Commit test', () => {
+  const stateTable = new StateTable();
+  stateTable.create('test', 'test1');
+  stateTable.update('test', 'test2');
+  stateTable.commit();
+  expect(stateTable.getCommit(1)[0].size).toBe(1);
+});
